@@ -1,0 +1,10 @@
+#previewImg {
+    display: block;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.tableImg {
+    width: 46px;
+    display: block;
+}
