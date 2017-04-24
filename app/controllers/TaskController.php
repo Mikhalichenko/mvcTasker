@@ -153,7 +153,7 @@ class TaskController extends BaseController
             if (file_exists($targetFile)) {
                 unlink($targetFile);
             }
-            $image_save_func($tmp, "$targetFile.$new_image_ext");
+            $image_save_func($tmp, "$targetFile");
         }
 
     }

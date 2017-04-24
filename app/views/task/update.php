@@ -22,12 +22,13 @@
                 <textarea class="form-control" id="textDescription" rows="3" name="description" required ><?= $data['description'] ?></textarea>
             </div>
 
-            <div class="radio">
+            <div class="checkbox">
                 <label><input type="checkbox" name="fulfilled" <?= $data['fulfilled'] ? 'checked' : '' ?>>Выполнено</label>
             </div>
 
             <button type="submit" class="btn btn-primary">Добавить</button>
         </form>
+        <img style="display: block; margin: 0 auto" src="/uploads/<?= $data['img'] ?>" alt="">
     </div>
 </div>
 
