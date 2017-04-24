@@ -19,11 +19,23 @@ class TaskModel extends BaseModel
      * @param $page
      * @return array
      */
-    public static function getTasks($page)
+    public static function getTasks($page, $filter = null)
     {
         $offset = ($page - 1) * self::SHOW_BY_DEFAULT;
 
-        $sql = "SELECT * FROM tasks LIMIT " . self::SHOW_BY_DEFAULT . " OFFSET $offset";
+        if ($filter !== null) {
+            $sql = "SELECT * FROM tasks ";
+
+           if ($filter['fulfilled'] && $filter['fulfilled'] != 'null') {
+
+               $sql .= " WHERE fulfilled = {$filter['fulfilled']}";
+           }
+
+            $sql .= " LIMIT " . self::SHOW_BY_DEFAULT . " OFFSET $offset";
+
+        } else {
+            $sql = "SELECT * FROM tasks LIMIT " . self::SHOW_BY_DEFAULT . " OFFSET $offset";
+        }
 
         $res = self::dbConnect()->query($sql);
 
@@ -34,9 +46,13 @@ class TaskModel extends BaseModel
      * Get count tasks
      * @return mixed
      */
-    public static function getCountTask()
+    public static function getCountTask($filter = null)
     {
-        $sql = "SELECT COUNT(id) FROM tasks";
+        if ($filter !== null) {
+            $sql = "SELECT COUNT(id) FROM tasks WHERE fulfilled = {$filter['fulfilled']}";
+        } else {
+            $sql = "SELECT COUNT(id) FROM tasks";
+        }
 
         $res = self::dbConnect()->query($sql);
 

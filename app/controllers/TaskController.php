@@ -18,15 +18,32 @@ class TaskController extends BaseController
      */
     public function actionIndex($page = 1)
     {
-        $tasksList  = TaskModel::getTasks($page);
+        $filterParams = null;
 
-        $countTasks = TaskModel::getCountTask();
+        if($_SERVER['REQUEST_METHOD'] == 'POST' &&  !empty($_POST)) {
+            $filterParams = $_POST;
+
+            if (isset($filterParams['reset'])) {
+                $tasksList  = TaskModel::getTasks($page);
+                $countTasks = TaskModel::getCountTask();
+                $filterParams = null;
+
+            } else {
+                $tasksList = TaskModel::getTasks($page, $filterParams);
+                $countTasks = TaskModel::getCountTask($filterParams);
+            }
+
+        } else {
+            $tasksList  = TaskModel::getTasks($page);
+            $countTasks = TaskModel::getCountTask();
+        }
 
         $pagination = new Pagination($countTasks[0], $page, TaskModel::SHOW_BY_DEFAULT, '');
 
         $this->render('site/index', [
-            'tasks' => $tasksList,
-            'pagination' => $pagination
+            'tasks'       => $tasksList,
+            'pagination'  => $pagination,
+            'filterParams' => $filterParams
         ]);
     }
 
@@ -36,7 +53,6 @@ class TaskController extends BaseController
     public function actionCreate()
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST' &&  !empty($_POST)) {
-
             $formData = $_POST;
 
             if (is_array(self::uploadImg($_FILES['img']))) {
