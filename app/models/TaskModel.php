@@ -50,6 +50,7 @@ class TaskModel extends BaseModel
     {
         if ($filter !== null) {
             $sql = "SELECT COUNT(id) FROM tasks WHERE fulfilled = {$filter['fulfilled']}";
+
         } else {
             $sql = "SELECT COUNT(id) FROM tasks";
         }

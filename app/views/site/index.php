@@ -2,7 +2,7 @@
 
     <div class="container">
         <div class="row">
-            <?require_once  VIES_PATH . 'widgets/table.php'?>
+            <?php require_once  VIES_PATH . 'widgets/table.php'?>
         </div>
     </div>
 

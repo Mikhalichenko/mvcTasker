@@ -11,7 +11,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th>
+                        <th style="width: 200px;">
 
                             <select name="fulfilled" class="form-control">
                                 <option value="null" selected>Выберите статус</option>
@@ -19,10 +19,14 @@
                                 <option value="0">Не выполнено</option>
                             </select>
                         </th>
-                        <th>
+                        <th style="width: 200px;">
                             <button class="btn btn-success">Фильтр</button>
                             <button class="btn btn-success" name="reset">Сброс</button>
                         </th>
+                         <?php if (isset($_SESSION['loggetUser'])){ ?>
+                             <th></th>
+                             <th></th>
+                         <?php }?>
                      </form>
                  </tr>
             </thead>
@@ -31,7 +35,7 @@
             <thead>
                 <th>Имя</th>
                 <th>Email</th>
-                <th>Описание задачи</th>
+                <th >Описание задачи</th>
                 <th>Cтатус</th>
                 <th>Изображение</th>
                 <?php if (isset($_SESSION['loggetUser'])){ ?>
@@ -47,7 +51,7 @@
                     <tr>
                         <td><?= $val['name']  ?></td>
                         <td><?= $val['email'] ?></td>
-                        <td><?= $val['description'] ?></td>
+                        <td style="width: 360px;"><?= $val['description'] ?></td>
                         <td><?= $val['fulfilled'] ? '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>' : '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' ?></td>
                         <td><img  class="tableImg" src="<?= '/uploads/'. $val['img'] ?>" alt="<?= $val['name']  ?>"></td>
 
